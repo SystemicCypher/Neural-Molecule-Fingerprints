@@ -25,15 +25,15 @@ def loadData(molecule_fpath, features_fpath):
             moleculeList.append(molID + "_l")
             graphs[molID + "_l"] = np.load(features_fpath + molID + "_graph_ligand.npy")
             atoms[molID + "_l"] = np.load(features_fpath + molID + "_atoms_ligand.npy")
-            bonds[molID + "_l"] = np.load(features_fpath + molID + "_bonds_ligand.npy")
+            #bonds[molID + "_l"] = np.load(features_fpath + molID + "_bonds_ligand.npy")
             counts[molID + "_l"] = number
         else:
             moleculeList.append(molID + "_d") 
             graphs[molID + "_d"] = np.load(features_fpath + molID + "_graph_decoy.npy")      
             atoms[molID + "_d"] = np.load(features_fpath + molID + "_atoms_decoy.npy")
-            bonds[molID + "_d"] = np.load(features_fpath + molID + "_bonds_decoy.npy")
+            #bonds[molID + "_d"] = np.load(features_fpath + molID + "_bonds_decoy.npy")
             counts[molID + "_d"] = number
-    return atoms, bonds, graphs, counts, moleculeList
+    return atoms, graphs, counts, moleculeList
 
 def one_hot(molecule_atoms_features):
     '''
@@ -64,9 +64,4 @@ def one_hot(molecule_atoms_features):
     oneHot = np.array(oneHot)
     return oneHot
 
-def neuralFingerprint(molecule_network, molecule_atoms_features, radius, hidden_weights, output_weights):
-    molecule_network = np.eye(molecule_network.shape[0]) + molecule_network
-    molecule_atoms_features = np.float64(molecule_atoms_features)
-    v = tf.matmul(molecule_network, molecule_atoms_features)
-    return v
     
