@@ -14,9 +14,10 @@ def fingerprint_model_layer(molecule_graph, layer_rep, fingerprint_len, feature_
     layer_fp = layers.Dense(fingerprint_len, activation='softmax')(v)
     return layer_rep, layer_fp
 
-def neural_graph_fingerprints(molecule_graph, layer_rep, radius, fingerprint_len, feature_size):
-    input_graph = layers.Input(shape=(feature_size,))
-    input_layer_rep = layers.Input(shape=(feature_size,))
+# Might not be needed: molecule_graph, layer_rep
+def neural_graph_fingerprints(radius, fingerprint_len, feature_size):
+    input_graph = layers.Input(shape=(None, None, 1))
+    input_layer_rep = layers.Input(shape=(None, None, 1))
     all_outputs = []
     for i in range(1,radius):
         input_layer_rep, layer_fp = fingerprint_model_layer(input_graph, input_layer_rep, fingerprint_len, feature_size)
