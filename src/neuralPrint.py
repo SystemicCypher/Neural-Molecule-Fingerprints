@@ -9,7 +9,7 @@ def loadData(molecule_fpath, features_fpath):
     graphs = {}
     atoms = {}
     counts = {}
-    bonds = {}
+    #bonds = {}
     
     moleculeList = []
     
