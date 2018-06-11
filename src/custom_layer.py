@@ -14,13 +14,13 @@ class NdexDense(Layer):
     def build(self, input_shape):
         # Create a trainable weight variable for this layer.
         self.kernel = []
-        if len(self.index) == 1:
+        if K.int_shape(self.index)[0] == 1:
             self.kernel.append(self.add_weight(name='kernel_{}'.format(self.index[0]), 
                                           shape=(input_shape[-1], self.output_dim),
                                           initializer=self.kernel_initializer,
                                           trainable=True))
-        elif len(self.index) > 1:
-            for i in range(len(self.index)):
+        elif K.int_shape(self.index)[0] > 1:
+            for i in range(K.int_shape(self.index)[1]):
                 self.kernel.append(self.add_weight(name='kernel_{}'.format(self.index[i]), 
                                           shape=(input_shape[-1], self.output_dim),
                                           initializer=self.kernel_initializer,
@@ -28,11 +28,11 @@ class NdexDense(Layer):
         super(NdexDense, self).build(input_shape)  # Be sure to call this at the end
 
     def call(self, x):
-        if len(self.index) == 1:
+        if K.int_shape(self.index)[0] == 1:
             return K.dot(x, self.kernel[0])
-        elif len(self.index) > 1:
+        elif K.int_shape(self.index)[0] > 1:
             output_tensor = []
-            for i in range(len(self.index)):
+            for i in range(K.int_shape(self.index)[0]):
                 output_tensor.append(K.dot(x[i],self.kernel[self.index[i]]))
             output_tensor = np.array(output_tensor)
             output_tensor = K.variable(output_tensor)
