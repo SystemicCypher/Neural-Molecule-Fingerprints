@@ -18,7 +18,7 @@ def fingerprint_model_layer(molecule_graph, layer_rep, fingerprint_len, feature_
     layer_rep_4 = layers.Dense(feature_size, use_bias=False)(adj_by_rep)
     layer_rep_5 = layers.Dense(feature_size, use_bias=False)(adj_by_rep)
 
-    layer_rep = layers.Lambda(lambda x: k.stack(x, axis=))([layer_rep_1, layer_rep_2, layer_rep_3, layer_rep_4, layer_rep_5])
+    layer_rep = layers.Lambda(lambda x: k.stack(x))([layer_rep_1, layer_rep_2, layer_rep_3, layer_rep_4, layer_rep_5])
     ego_size = layers.Lambda(lambda x: k.one_hot(x, 5))(ego_size)
     
 
