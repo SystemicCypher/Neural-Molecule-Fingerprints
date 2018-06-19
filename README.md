@@ -21,6 +21,8 @@ This folder contains the implementation (in Python 2.7) and Jupyter notebooks us
 
 - NumPy (data storage and loading)
 
+- Pandas (for data loading)
+
 ## Implementation Details
 - _Prototyping Neuralfingerprints.ipynb_
 This imports and tests the code from data_preprocessing.py, neuralPrint.py, and model.py
