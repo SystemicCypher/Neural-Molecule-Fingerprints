@@ -34,8 +34,8 @@ def fingerprint_model_layer(molecule_graph, layer_rep, fingerprint_len, feature_
 
 # Might not be needed: molecule_graph, layer_rep
 def neural_graph_fingerprints(radius, fingerprint_len, feature_size):
-    input_graph = layers.Input(shape=(None, None), name="input_graph")
-    input_layer_rep = layers.Input(shape=(None, feature_size), name="input_layer_rep")
+    input_graph = layers.Input(shape=(None, None))
+    input_layer_rep = layers.Input(shape=(None, feature_size))
     all_outputs = []
 
     for i in range(1, radius):
