@@ -7,26 +7,26 @@ import pandas as p
 def process(atoms_fpath, bonds_fpath, dist_fpath, molecList_fpath, save_fpath, flag):
     if flag == 0 or flag == 1:
         create_molecule_list(atoms_fpath, molecList_fpath)
-        print "Molecule list created..."
+        print("Molecule list created...")
     if flag == 0 or flag == 2:
         #create_unweighted_graphs(molecList_fpath, bonds_fpath, save_fpath, "1")
         #create_unweighted_graphs(molecList_fpath, bonds_fpath, save_fpath, "0")
         create_unweighted_graphs_panda(molecList_fpath, bonds_fpath, atoms_fpath, save_fpath)
-        print "Unweighted graphs created..."
+        print("Unweighted graphs created...")
     if flag == 0 or flag == 3:
         #create_atoms_arrays(atoms_fpath, molecList_fpath, save_fpath, "1")
         #create_atoms_arrays(atoms_fpath, molecList_fpath, save_fpath, "0")
         create_atoms_arrays_panda(atoms_fpath, molecList_fpath, save_fpath)
-        print "Atom arrays created..."
+        print("Atom arrays created...")
     if flag == 0 or flag == 4:
         #create_bonds_arrays(bonds_fpath, molecList_fpath, save_fpath, "1")
         #create_bonds_arrays(bonds_fpath, molecList_fpath, save_fpath, "0")
         create_bonds_arrays_panda(atoms_fpath, bonds_fpath, molecList_fpath, save_fpath)
-        print "Bonds arrays created..."
+        print("Bonds arrays created...")
     if flag == 1 or flag == 2 or flag == 3 or flag == 4 or flag == 0:
-        print "Done preprocessing!"
+        print("Done preprocessing!")
     if flag < 0 or flag > 4:
-        print "No preprocessing done!"
+        print("No preprocessing done!")
 
 def create_molecule_list(data_fpath, molecList_fpath):
     # Creates molecule list
@@ -248,7 +248,7 @@ def create_unweighted_graphs_panda(molecList_fpath, bonds_fpath, atoms_fpath, sa
     for line in lines:
         molecule = line.split()[0]
         ligand = line.split()[2]
-        print str(number_complete) +  " out of " + str(total)
+        print(str(number_complete) +  " out of " + str(total))
         number_complete += 1
         if ligand == "1":
             count = len(bonds[(bonds['molID'] == molecule) & (bonds['D_L'] == 1)])
@@ -296,7 +296,7 @@ def create_atoms_arrays_panda(data_fpath, molecList_fpath, save_fpath):
         moleculeID = molecule.split()[0]
         ligand = molecule.split()[2]
         percent = number_complete/total * 100
-        print str(percent) + "%"
+        print(str(percent) + "%")
         if ligand == "1":
             molecules[moleculeID + "_l"] = []
             count = len(atoms[(atoms['molID'] == moleculeID) & (atoms['conf'] == 1) & (atoms['D_L'] == 1)])
