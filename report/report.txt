@@ -11,3 +11,11 @@ Model.py contains the neural fingerprint model producing functions while predict
 the predictor model as defined in the paper. With a fix to remove the effects of the padding in the fingerprint generator,
 the model that's constructed should function closer to the intended one-hot model construction.
 
+The unsupervised fingerprinter did, in essence, end up acting like a hasher for the molecular graph while the 
+trained fingerprinted appeared to learn some features regarding the structure of the molecule. The predictor
+in either case was just a model with a single hidden layer that would output a prediction of either decoy or 
+ligand for whatever chemical property one trained it to search for given a fingerprint of the molecule.
+
+The conformer data was not used, nor were the 3-D distances between the atoms. Introduction of these features to
+the data used in the model could likely produce better results, as well as providing more data for both decoys
+and ligands for particular properties.
