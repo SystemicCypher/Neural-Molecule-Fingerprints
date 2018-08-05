@@ -1,0 +1,21 @@
+Neural Molecular Fingerprints Results
+
+After a few issues with data input, there is a restriction on this fingerprinting model.
+The data is padded up to 80 spaces (as the largest molecule has 77 atoms), so that does affect the fingerprint output, and attempting to
+use a one-hot method worked only up to the point where the actual one-hot tensor needed to be created.
+The method would only function when the input to the one-hot method was a tensor of integers. I instead used padding
+and iteration to select the appropriate dense layer to pass through at each given atom. Furthermore, the code assumes
+batch sizes of 1 (for fingerprint generation), which would be a point to fix in later iterations.
+
+Model.py contains the neural fingerprint model producing functions while predictor.py has a function that generates
+the predictor model as defined in the paper. With a fix to remove the effects of the padding in the fingerprint generator,
+the model that's constructed should function closer to the intended one-hot model construction.
+
+The unsupervised fingerprinter did, in essence, end up acting like a hasher for the molecular graph while the 
+trained fingerprinted appeared to learn some features regarding the structure of the molecule. The predictor
+in either case was just a model with a single hidden layer that would output a prediction of either decoy or 
+ligand for whatever chemical property one trained it to search for given a fingerprint of the molecule.
+
+The conformer data was not used, nor were the 3-D distances between the atoms. Introduction of these features to
+the data used in the model could likely produce better results, as well as providing more data for both decoys
+and ligands for particular properties.
