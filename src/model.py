@@ -46,6 +46,6 @@ def neural_graph_fingerprints(radius, fingerprint_len, feature_size):
     #final_fp = layers.merge(all_outputs, mode='sum', name="final_merge")
     final_fp = layers.Lambda(lambda x : k.sum(x, axis=1))(all_outputs)
     
-    neural_fp = models.Model(inputs = [input_graph, input_layer_rep], outputs = [final_fp])
+    neural_fp = models.Model(inputs = [input_graph, input_layer_rep], outputs = final_fp)
     neural_fp.compile(optimizer = optimizers.Adam(), loss='categorical_crossentropy')
     return neural_fp
